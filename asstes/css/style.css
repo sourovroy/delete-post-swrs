@@ -1,0 +1,23 @@
+.dps-left-column,
+.dps-right-column{
+	float: left;
+	width: 50%;
+	position: relative;
+	min-height: 10px;
+}
+
+.dps-form-table select{
+	min-width: 180px;
+}
+
+.dps-loading{
+	position: absolute;
+	left: 10px;
+    top: -30px;
+	width: 20px;
+	height: 20px;
+}
+
+div .visible{
+	visibility: visible;
+}
