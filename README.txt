@@ -21,7 +21,7 @@ Done!
 If you need more feature on this plugin, Please send me a mail sourovfci@gmail.com i will add your feature.
 
 This plugin is also in github
-
+https://github.com/sourovroy/delete-post-swrs
 
 == Installation ==
 
