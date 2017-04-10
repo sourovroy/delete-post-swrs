@@ -77,6 +77,7 @@ if(!class_exists('Delete_Post_Swrs')){
 											<option value="<?php echo $post_type->name; ?>"><?php echo $post_type->labels->name; ?></option>
 											<?php endforeach; ?>
 										</select>
+										<p class="dps-desc">Choose post type.</p>
 									</td>
 								</tr>
 								<tr>
@@ -86,14 +87,13 @@ if(!class_exists('Delete_Post_Swrs')){
 									<td>
 										<select name="post_quantity">
 											<option value="all"><?php _e('All', 'delete-post-swrs'); ?></option>
-											<option value="2">2</option>
-											<option value="12">12</option>
 											<option value="50">50</option>
 											<option value="100">100</option>
 											<option value="200">200</option>
 											<option value="500">500</option>
 											<option value="1000">1000</option>
 										</select>
+										<p class="dps-desc">Choose how many post you want to delete.</p>
 									</td>
 								</tr>
 								<tr>
@@ -188,11 +188,8 @@ if(!class_exists('Delete_Post_Swrs')){
 	    	
 	    	if( wp_verify_nonce($delete_data['_nonce'], 'DeletePostNonce') ){ //Check nonce is correct or not
 
-	    		$per_page = ( $delete_data['post_quantity'] != 'all' && $delete_data['post_quantity'] < 50 ) ? $delete_data['post_quantity'] : 10;
+	    		$per_page = ( isset($delete_data['prePage']) ) ? $delete_data['prePage'] : 10;
 	    		$force_delete = ($delete_data['delete_type'] == 'permanent') ? true : false;
-
-	    		//Prepage not works
-	    		//Need to fix
 
 	    		$arg = array(
 	    			'post_type' => $delete_data['select_post_type'],
@@ -200,23 +197,27 @@ if(!class_exists('Delete_Post_Swrs')){
 	    			'offset'=> 0,
 	    			'post_status' => 'any'
 	    		);
-
+				$deleteID = '';
 	    		$your_posts = get_posts($arg);
 	    		if($your_posts){
+					sleep(1); // Delay execution for 1 second
 
 	    			if( $delete_data['select_post_type'] == 'attachment' ){ //Check post type is media or not
 	    				foreach( $your_posts as $myproduct ){
 					        wp_delete_attachment($myproduct->ID, true);
+					        $deleteID .= $myproduct->ID. ', ';
 					    }
 	    			}else{
 	    				foreach( $your_posts as $myproduct ){
 					        wp_delete_post( $myproduct->ID, $force_delete);
+					        $deleteID .= $myproduct->ID. ', ';
 					    }
 	    			}// End if
 					
 				    echo wp_json_encode([
 				    	'error' => null,
-				    	'deleted' => count($your_posts)
+				    	'deleted' => count($your_posts),
+				    	'deleted_ids' => $deleteID
 				    ]);
 	    		}else{
 		    		echo wp_json_encode(['error' => 'Something wrong here.']);

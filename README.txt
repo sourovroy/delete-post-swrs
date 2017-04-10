@@ -13,8 +13,15 @@ This plugin will delete post of any post type with easy way.
 == Description ==
 
 If you want to delete your all post at a time this plugin will help you to do this.
-Go to Delete Post settings page selece a post type then click on start delete button.
+Go to Delete Post settings page selece a post type then click on Process Delete button.
+Then it will show a report,
+Now if you want to delete post just click Start Delete button.
 Done!
+
+If you need more feature on this plugin, Please send me a mail sourovfci@gmail.com i will add your feature.
+
+This plugin is also in github
+
 
 == Installation ==
 
@@ -24,8 +31,9 @@ Done!
 
 == Screenshots ==
 
-1. This is the first screen shot
-2. This is the second screen shot
+1. Basic settings of delete post
+2. Delete post report about delete
+3. Delete result
 
 == Changelog ==
 
